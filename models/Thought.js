@@ -12,8 +12,9 @@ const reactionSchema = new Schema(
     reactionBody: {
       type: String,
       required: true,
+      maxLength: 280
     },
-    writtenBy: {
+    username: {
       type: String,
       required: true,
       trim: true,
@@ -33,11 +34,13 @@ const reactionSchema = new Schema(
 
 const thoughtSchema = new Schema(
   {
-    writtenBy: {
+    thoughtText: {
       type: String,
       required: true,
+      minLength: 1,
+      maxLength: 280
     },
-    thoughtBody: {
+    username: {
       type: String,
       required: true,
     },
