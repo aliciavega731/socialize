@@ -13,7 +13,7 @@ const userController = {
       });
   },
 
-  getUserById( { params }, res) {
+  getUserById({ params }, res) {
     User.findOne({ _id: params.id })
       .populate(
         { path: 'thoughts', select: "-__v" },
@@ -36,7 +36,7 @@ const userController = {
       });
   },
 
-  updateUser( { params, body }, res){
+  updateUser({ params, body }, res){
     User.findOneAndUpdate({ _id: params.id }, body, {new: true, runValidators: true})
       .then((data)=>{res.json(data)})
       .catch(err => {
@@ -45,7 +45,7 @@ const userController = {
     });
   },
 
-  deleteUser( { params }, res){
+  deleteUser({ params }, res){
     User.findOneandDelete({ _id: params.id })
       .then((data)=>{res.json(data)})
       .catch(err => {

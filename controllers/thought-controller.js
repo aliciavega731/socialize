@@ -5,6 +5,7 @@ const thoughtController = {
   // Grabs all of the thoughts api/thoughts
   getAllThoughts(req, res) {
     Thought.find()
+      .populate({ path: "reactions", select: "-__v" })
       .select("-__v")
       .then((data) => {
         res.json(data);
@@ -17,6 +18,7 @@ const thoughtController = {
 
   getThoughtById({ params }, res) {
     Thought.findOne({ _id: params.id })
+      .populate({ path: "reactions", select: "-__v" })
       .select("-__v")
       .then((data) => {
         res.json(data);
@@ -30,10 +32,10 @@ const thoughtController = {
   // Creates a thought
   addThought({ body }, res) {
     Thought.create(body)
-      .then(({ _id }) => {
+      .then((data) => {
         return User.findOneAndUpdate(
           { _id: body.id },
-          { $push: { thoughts: params.id } },
+          { $push: { thoughts: data.id } },
           { new: true }
         );
       })
@@ -56,7 +58,7 @@ const thoughtController = {
           return;
         }
         User.findOneAndUpdate(
-          { _id: data.username },
+          { username: data.username },
           { $pull: { thoughts: params.id } }
         );
       })
