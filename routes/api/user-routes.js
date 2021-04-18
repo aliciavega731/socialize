@@ -1,4 +1,5 @@
-// Code taken and adapted from Module 18 assignment and tutoring with David (TA)
+// Code taken and adapted from Module 18 assignment and tutoring with David (TA). 
+// Worked with Cori Cathemer and may have some similarities
 const router = require("express").Router();
 
 const {
@@ -19,13 +20,13 @@ router
 
 // /api/user/1
 router
-  .route("/:userId")
+  .route("/:id")
   .get(getUserById) //get one user
   .put(updateUser) //update one user
   .delete(deleteUser); //delete one user
 
 // /api/user/1/friends/2
-router.route("/:userId/friends/:friendId")
+router.route("/:id/friends/:friendId")
   .post(addFriend)
   .delete(deleteFriend);
 
