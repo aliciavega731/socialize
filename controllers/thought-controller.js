@@ -1,7 +1,18 @@
 // Code taken and adapted from Module 18 assignment
 const { Thought, User } = require('../models');
 
-const commentController = {
+const thoughtController = {
+  //get api/thoughts
+  getAllThoughts(req, res){
+    Thought.find()
+      .select('-__v')
+      .then((data)=>{res.json(data)})
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(400);
+      });
+  },
+  
   addComment({ params, body }, res) {
     console.log(params);
     Comment.create(body)
@@ -41,17 +52,18 @@ const commentController = {
   },
 
   // remove comment
-  removeComment({ params }, res) {
-    Comment.findOneAndDelete({ _id: params.commentId })
-      .then(deletedComment => {
-        if (!deletedComment) {
-          return res.status(404).json({ message: 'No comment with this id!' });
+  removeThought({ params }, res) {
+    Thought.findOneAndDelete({ _id: params.id })
+      .then(data => {
+        if (!data) {
+          res.status(404).json({ message: 'No thought found with this id!' });
+          return;
         }
-        return Pizza.findOneAndUpdate(
-          { _id: params.pizzaId },
-          { $pull: { comments: params.commentId } },
-          { new: true }
-        );
+        User.findOneAndUpdate(
+          { _id: data.username },
+          { $pull: { thoughts: params.id } },
+        )
+        res.json({message})
       })
       .then(dbPizzaData => {
         if (!dbPizzaData) {
@@ -74,4 +86,4 @@ const commentController = {
   }
 };
 
-module.exports = commentController;
+module.exports = thoughtController;
