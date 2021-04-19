@@ -52,7 +52,9 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
 - Add a reaction: POST /api/thoughts/:id/reactions
 - Delete a reaction: DELETE /api/thoughts/:id/reactions
 
-![Video Walkthrough](./assets/Social-Network-API.mp4)
+![Walkthrough](./assets/Social_Network_API.gif)
+
+Full video can be found in the assets folder.
 
 ## License
 This application is licensed by ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg).
