@@ -15,15 +15,13 @@ const userController = {
       });
   },
 
-  getUserById({ params }, res) {
-    User.findOne({ _id: params._id })
-      .populate(
-        { path: "thoughts", select: "-__v" },
-        { path: "friends", select: "-__v" }
-      )
+  getUserById(req, res) {
+    console.log(req.params.id)
+    User.findOne({_id: req.params.id})
       .select("-__v")
       .then((data) => {
         res.json(data);
+        console.log(data)
       })
       .catch((err) => {
         console.log(err);
