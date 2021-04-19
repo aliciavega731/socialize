@@ -49,7 +49,7 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
 - Delete a thought: DELETE /api/thoughts/:id
 
 #### Reaction
-- Add a reaction: PUT /api/thoughts/:id/reactions
+- Add a reaction: POST /api/thoughts/:id/reactions
 - Delete a reaction: DELETE /api/thoughts/:id/reactions
 
 ## License
